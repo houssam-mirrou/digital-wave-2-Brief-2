@@ -6,5 +6,8 @@ RUN a2enmod rewrite
 # Install PDO MySQL extension
 RUN docker-php-ext-install pdo pdo_mysql
 
+# Install also Mysqli extension
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+
 # Copy your Apache config
 COPY apache.conf /etc/apache2/conf-enabled/apache.conf
