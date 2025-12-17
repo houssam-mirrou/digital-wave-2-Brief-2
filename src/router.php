@@ -13,7 +13,7 @@ $routes = [
 
 
 
-function route_to_controller($uri, $routes)
+function route_to_controller($uri, $routes,$data)
 {
     if (array_key_exists($uri, $routes)) {
         require $routes[$uri];
@@ -23,9 +23,10 @@ function route_to_controller($uri, $routes)
 }
 
 
-function route_to_layout($uri, $routes_layout)
+function route_to_layout($uri, $routes_layout,$data,$props = [])
 {
     if (array_key_exists($uri, $routes_layout)) {
+        extract($props);
         require $routes_layout[$uri];
 
     } else {
@@ -40,4 +41,4 @@ function abort($code = 404)
     die();
 }
 
-route_to_controller($uri, $routes);
+route_to_controller($uri, $routes,$data);

@@ -1,11 +1,16 @@
 <?php
 
-function dd ($value){
+//function that shows the values of a variable
+
+function dd($value)
+{
     echo "<pre>";
     var_dump($value);
     echo "</pre>";
     die();
 }
+
+//function that checks the value is the url for the header 
 
 function isUrl($value)
 {
@@ -15,18 +20,55 @@ function isUrl($value)
     return false;
 }
 
+//function that validate name 
 
 function valider_name($name)
 {
     if ($name === null) {
         return false;
     }
-    $regex = "/^[A-Za-z]{3,}$/";
+    $regex = "/^[A-Za-z ]{3,}$/";
     if (preg_match($regex, $name)) {
         return true;
     }
     return false;
 }
+
+// function validate the number
+
+
+function verifier_phone($phone)
+{
+    if ($phone == null) {
+        return false;
+    }
+    $regex = "/^\+?[0-9]{8,15}$/";
+
+    if (preg_match($regex, $phone)) {
+        return true;
+    }
+    return false;
+}
+
+function verifier_mot_pass($password, $reconfirm_password)
+{
+    if ($password == null) {
+        return false;
+    }
+    if ($password != $reconfirm_password) {
+        return false;
+    }
+
+    $regex = "/^[A-Za-z0-9#@&!%$]{8,}$/";
+
+    if (preg_match($regex, $password)) {
+        return true;
+    }
+    return false;
+}
+
+//function that validate the email
+
 function valider_email($email)
 {
     if ($email === null) {
@@ -34,6 +76,9 @@ function valider_email($email)
     }
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
+
+//function that validate the description
+
 function valider_description($description)
 {
     if ($description === null) {
@@ -46,35 +91,25 @@ function valider_description($description)
     return false;
 }
 
-function valider_les_champ($name, $email, $description)
+//verifier si email et deja prené par un personne
+
+function email_available($email,$data)
 {
-    if (!valider_name($name)) {
-        echo '
-            <script>
-                const name_input = document.querySelector(".username");
-                console.log(name_input);
-                name_input.focus();
-            </script>
-        ';
-        return false;
+    $query = 'SELECT email from users where email = ?;';
+    $result = $data->query($query,[$email]);
+    if($result==[]){
+        return true;
     }
-    if (!valider_email($email)) {
-        echo '
-            <script>
-                const email_input = document.querySelector(".email");
-                email_input.focus();
-            </script>
-        ';
-        return false;
+    return false;
+}
+
+//verifier si le numero de telephone est deja prenait par un personne
+
+function phone_available($phone,$data){
+    $query = 'SELECT phone_number from users where phone = ?';
+    $result = $data->query($query,[$phone]);
+    if($result==[]){
+        return true;
     }
-    if (!valider_description($description)) {
-        echo '
-            <script>
-                const description_input = document.querySelector(".description");
-                description_input.focus();
-            </script>
-        ';
-        return false;
-    }
-    return true;
+    return false;
 }
