@@ -8,7 +8,8 @@ $routes = [
     '/services' => __DIR__ . '/controllers/services.php',
     '/sign-in' => __DIR__ . '/controllers/sign_in.php',
     '/sign-up' => __DIR__ . '/controllers/sign_up.php',
-    '/profile' => __DIR__ . '/controllers/profile.php'
+    '/profile' => __DIR__ . '/controllers/profile.php',
+    '/sign-out' => __DIR__ . '/controllers/sign_out.php'
 ];
 
 

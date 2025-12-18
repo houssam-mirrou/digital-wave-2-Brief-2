@@ -11,6 +11,13 @@
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse E-mail</label>
                         <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+                        <?php
+                        if (!valider_name($user_sing_in['email']) && $user_sing_in['email'] !== null) {
+                            echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    <span class="font-bold">Erreur:</span> Veuillez entrer un email valide.
+                                </p>';
+                        }
+                        ?>
                     </div>
                     <div>
                         <div class="flex items-center justify-between">
@@ -20,6 +27,13 @@
                             </div>
                         </div>
                         <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                        <?php
+                        if (!valider_name($user_sing_in['password']) && $user_sing_in['password'] !== null) {
+                            echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    <span class="font-bold">Erreur:</span> Veuillez entrer un mot de pass valide (doit etre plus que 8 caractères).
+                                </p>';
+                        }
+                        ?>
                     </div>
                     <button type="submit" class="w-full border-white bg-gray-700 text-white font-medium py-2.5 rounded-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-300 transform hover:scale-[1.02]">Sign in</button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
