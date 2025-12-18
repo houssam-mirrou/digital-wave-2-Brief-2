@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center justify-center absolute w-full h-screen bg-gray-800 bg-opacity-70 hidden">
+<div class="flex flex-col items-center justify-center absolute w-full h-screen bg-gray-800 bg-opacity-70 hidden edit-profile-modal">
     <section class="w-full">
         <form class="space-y-4 md:space-y-6 w-full" action="" method="POST">
             <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full">
