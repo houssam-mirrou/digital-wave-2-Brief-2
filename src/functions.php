@@ -34,6 +34,37 @@ function valider_email($email)
     }
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
+
+function verifier_phone($phone)
+{
+    if ($phone == null) {
+        return false;
+    }
+    $regex = "/^\+?[0-9]{8,15}$/";
+
+    if (preg_match($regex, $phone)) {
+        return true;
+    }
+    return false;
+}
+
+function verifier_mot_pass($password, $reconfirm_password)
+{
+    if ($password == null) {
+        return false;
+    }
+    if ($password != $reconfirm_password) {
+        return false;
+    }
+
+    $regex = "/^[A-Za-z0-9#@&!%$]{8,}$/";
+
+    if (preg_match($regex, $password)) {
+        return true;
+    }
+    return false;
+}
+
 function valider_description($description)
 {
     if ($description === null) {
@@ -46,35 +77,47 @@ function valider_description($description)
     return false;
 }
 
-function valider_les_champ($name, $email, $description)
+//verifier si email et deja prené par un personne
+
+function email_available($email, $data)
 {
-    if (!valider_name($name)) {
-        echo '
-            <script>
-                const name_input = document.querySelector(".username");
-                console.log(name_input);
-                name_input.focus();
-            </script>
-        ';
-        return false;
+    $query = 'SELECT email from users where email = ?;';
+    $result = $data->query($query, [$email]);
+    if ($result == []) {
+        return true;
     }
-    if (!valider_email($email)) {
-        echo '
-            <script>
-                const email_input = document.querySelector(".email");
-                email_input.focus();
-            </script>
-        ';
-        return false;
+    return false;
+}
+
+//verifier si le numero de telephone est deja prenait par un personne
+
+function phone_available($phone, $data)
+{
+    $query = 'SELECT phone_number from users where phone_number = ?';
+    $result = $data->query($query, [$phone]);
+    if ($result == []) {
+        return true;
     }
-    if (!valider_description($description)) {
-        echo '
-            <script>
-                const description_input = document.querySelector(".description");
-                description_input.focus();
-            </script>
-        ';
-        return false;
+    return false;
+}
+
+//verifier si le password match the password in the data base
+
+function same_password($email, $password, $data)
+{
+    $query = 'SELECT mot_de_pass from users where email = ?';
+    $result = $data->query($query, [$email]);
+    if(password_verify($password,$result[0]['mot_de_pass'])){
+        return true;
     }
-    return true;
+    return false;
+}
+
+function return_user_information($email,$data){
+    $query = 'SELECT * from users where email = ?;';
+    $result = $data->query($query, [$email]);
+    if ($result == []) {
+        return null;
+    }
+    return $result[0];
 }
