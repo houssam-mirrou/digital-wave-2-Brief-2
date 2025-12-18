@@ -1,5 +1,9 @@
 <?php
 
+if(isset($_SESSION['user'])){
+    header("Location: /");
+}
+
 $user = [
     'email' => null,
     'first_name' => null,
@@ -33,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         valider_name($first_name) && verifier_phone($phone) && verifier_mot_pass($password, $reconfirm_password)
         && valider_email($email)
     ) {
-        if (strlen($biography) != 0) {
-            if (email_available($email, $data) && phone_available($phone, $data)) {
+        if (email_available($email, $data) && phone_available($phone, $data)) {
+            if (strlen($biography) != 0) {
                 if (valider_description($biography)) {
                     $query = 'insert into users (first_name,last_name,email,phone_number,biography,
                     mot_de_pass) values(?,?,?,?,?,?)';
@@ -56,28 +60,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $user['biographie'] = null;
                     $user['password'] = null;
                     $user['reconfirm_password'] = null;
-                } else {
 
-                    $query = 'insert into users (first_name,last_name,email,phone_number,
-                    mot_de_pass) values(?,?,?,?,?)';
-                    $params = [
-                        $first_name,
-                        $last_name,
-                        $email,
-                        $phone,
-                        $hashed_password
-                    ];
-                    $data->query($query, $params);
-
-
-                    $user['first_name'] = null;
-                    $user['last_name'] = null;
-                    $user['email'] = null;
-                    $user['phone'] = null;
-                    $user['biographie'] = null;
-                    $user['password'] = null;
-                    $user['reconfirm_password'] = null;
+                    header('Location: /sign-in');
+                    exit();
                 }
+            } else {
+
+                $query = 'insert into users (first_name,last_name,email,phone_number,
+                    mot_de_pass) values(?,?,?,?,?)';
+                $params = [
+                    $first_name,
+                    $last_name,
+                    $email,
+                    $phone,
+                    $hashed_password
+                ];
+                $data->query($query, $params);
+
+
+                $user['first_name'] = null;
+                $user['last_name'] = null;
+                $user['email'] = null;
+                $user['phone'] = null;
+                $user['biographie'] = null;
+                $user['password'] = null;
+                $user['reconfirm_password'] = null;
+
+                header('Location: /sign-in');
+                exit();
             }
         }
     }

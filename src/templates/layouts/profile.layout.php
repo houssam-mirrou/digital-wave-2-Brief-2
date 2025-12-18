@@ -1,3 +1,25 @@
+<div class="flex flex-col items-center justify-center absolute w-full h-screen bg-gray-800 bg-opacity-70 hidden">
+    <section class="w-full">
+        <form class="space-y-4 md:space-y-6 w-full" action="" method="POST">
+            <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full">
+                <div class="w-1/2 bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700">
+                    <div class="flex flex-row gap-4 p-8">
+                        <div class="flex flex-col w-1/2">
+                            <label for="prenom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Votre prénom</label>
+                            <input type="text" name="prenom" id="prenom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Prénom" required="">
+                        </div>
+                        <div class="flex flex-col w-1/2">
+                            <label for="nom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Votre nom</label>
+                            <input type="text" name="nom" id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nom" required="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+</div>
+
+
 <div class="mx-auto max-w-(--breakpoint-2xl) p-4 pb-20 md:p-6 md:pb-6">
 
     <div class="rounded-2xl border border-gray-200 bg-white p-5 lg:p-6 dark:border-gray-800 dark:bg-white/[0.03]">
@@ -13,11 +35,11 @@
                     </div>
                     <div class="order-3 xl:order-2">
                         <h4 class="mb-2 text-center text-lg font-semibold text-gray-800 xl:text-left dark:text-white/90">
-                            Houssam Mirrou
+                            <?= $profile_user['first_name'] . ' ' . $profile_user['last_name'] ?>
                         </h4>
                         <div class="flex flex-col items-center gap-1 text-center xl:flex-row xl:gap-3 xl:text-left">
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                Safi, Morocco.
+                                Been a user since : <?= $profile_user['date_inscription'] ?>
                             </p>
                         </div>
                     </div>
@@ -45,7 +67,7 @@
                                 First Name
                             </p>
                             <p class="text-sm font-medium text-gray-800 dark:text-white/90">
-                                Houssam
+                                <?= $profile_user['first_name'] ?>
                             </p>
                         </div>
 
@@ -54,7 +76,7 @@
                                 Last Name
                             </p>
                             <p class="text-sm font-medium text-gray-800 dark:text-white/90">
-                                Mirrou
+                                <?= $profile_user['last_name'] ?>
                             </p>
                         </div>
 
@@ -63,7 +85,7 @@
                                 Email address
                             </p>
                             <p class="text-sm font-medium text-gray-800 dark:text-white/90">
-                                hossam.mirrou@gmail.com
+                                <?= $profile_user['email'] ?>
                             </p>
                         </div>
 
@@ -72,7 +94,7 @@
                                 Phone
                             </p>
                             <p class="text-sm font-medium text-gray-800 dark:text-white/90">
-                                +212 6 03 13 01 15
+                                <?= $profile_user['phone_number'] ?>
                             </p>
                         </div>
 
@@ -81,7 +103,7 @@
                                 Bio
                             </p>
                             <p class="text-sm font-medium text-gray-800 dark:text-white/90">
-                                Team Manager
+                                <?= $profile_user['biography'] ?>
                             </p>
                         </div>
                     </div>

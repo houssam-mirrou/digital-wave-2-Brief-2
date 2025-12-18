@@ -9,7 +9,7 @@
 </head>
 
 <body class="min-h-screen flex flex-col bg-slate-800 text-white">
-
+    
     <header class="shadow-md bg-gray-900">
         <nav class="flex justify-between items-center p-4 w-full">
             <div class="flex flex-row items-center w-[80%]">
@@ -48,8 +48,15 @@
             </div>
             <div>
                 <ul class="flex gap-4 items-center">
-                    <li><a href="/sign-in" class="px-5 inline-block p-3 border-white bg-gray-900 text-white font-medium py-2.5 rounded-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">Connecter</a></li>
-                    <li><a href="/sign-up" class="px-5 p-3 inline-block border-white bg-gray-900 text-white font-medium py-2.5 rounded-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">Inscription</a></li>
+                    <?php if(!isset($_SESSION['user'])) {
+                        echo '<li><a href="/sign-in" class="px-5 inline-block p-3 border-white bg-gray-900 text-white font-medium py-2.5 rounded-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">Connecter</a></li>';
+                        echo '<li><a href="/sign-up" class="px-5 p-3 inline-block border-white bg-gray-900 text-white font-medium py-2.5 rounded-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">Inscription</a></li>';
+                    } 
+                    else {
+                        echo '<li><a href="/profile" class="px-5 inline-block p-3 border-white bg-gray-900 text-white font-medium py-2.5 rounded-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">Profile</a></li>';
+                        echo '<li><a href="/sign-out" class="px-5 p-3 inline-block border-white bg-gray-900 text-white font-medium py-2.5 rounded-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">Sign out</a></li>';
+                    }
+                    ?>
                 </ul>
             </div>
         </nav>

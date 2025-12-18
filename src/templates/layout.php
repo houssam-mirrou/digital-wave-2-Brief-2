@@ -16,7 +16,9 @@ echo '<main class="flex-1">';
 route_to_layout($uri, $routes_layout,$data,[
     'tableaux' => $tableaux ?? null,
     'contacts' => $contacts ?? null,
-    'user' => $user ?? null
+    'user' => $user ?? null,
+    'user_sing_in' => $user_sing_in ?? null,
+    'profile_user' => $profile_user ?? null
 ]);
 
 echo '</main>';
