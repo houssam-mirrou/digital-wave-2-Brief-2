@@ -13,7 +13,7 @@
     <header class="shadow-md bg-gray-900">
         <nav class="flex justify-between items-center p-4 w-full">
             <div class="flex flex-row items-center w-[80%]">
-                <img src="../img/wave2.png" class="h-16">
+                <img src="/img/wave2.png" class="h-16">
                 <div class="flex flex-row gap-6 items-center w-[100%]">
                     <h1 class="text-2xl font-bold ">DigitalWave</h1>
                     <div class="w-[100%]">
@@ -48,7 +48,7 @@
             </div>
             <div>
                 <ul class="flex gap-4 items-center">
-                    <?php if(!isset($_SESSION['user'])) {
+                    <?php if(!isset($_SESSION['user_id'])) {
                         echo '<li><a href="/sign-in" class="px-5 inline-block p-3 border-white bg-gray-900 text-white font-medium py-2.5 rounded-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">Connecter</a></li>';
                         echo '<li><a href="/sign-up" class="px-5 p-3 inline-block border-white bg-gray-900 text-white font-medium py-2.5 rounded-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">Inscription</a></li>';
                     } 
