@@ -127,10 +127,19 @@ function same_password($email, $password, $data)
     return false;
 }
 
-function return_user_information($email,$data){
-    $query = 'SELECT * from users where email = ?;';
+function return_user_id($email,$data){
+    $query = 'SELECT id from users where email = ?;';
     $result = $data->query($query, [$email]);
     if ($result == []) {
+        return null;
+    }
+    return $result[0];
+}
+
+function return_user_information($id,$data){
+    $query = 'SELECT * from users where id = ?';
+    $result = $data->query($query,[$id]);
+    if($result == []){
         return null;
     }
     return $result[0];

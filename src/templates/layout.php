@@ -18,7 +18,10 @@ route_to_layout($uri, $routes_layout,$data,[
     'contacts' => $contacts ?? null,
     'user' => $user ?? null,
     'user_sing_in' => $user_sing_in ?? null,
-    'profile_user' => $profile_user ?? null
+    'profile_user' => $profile_user ?? null,
+    'profile_edit_user' => $profile_edit_user ?? null,
+    'form_inputs' => $form_inputs ?? null,
+    'errors' => $errors ?? null
 ]);
 
 echo '</main>';
