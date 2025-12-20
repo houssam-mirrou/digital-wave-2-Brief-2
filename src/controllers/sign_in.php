@@ -19,10 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (valider_email($email)) {
         if (!email_available($email, $data)) {
-            $result = same_password($email, $password, $data);
+            $current_user = return_user_id($email, $data);
+            $is_admin = return_if_user_admin($email,$data);
+            if($is_admin == 1){
+                $result = same_password($email,$password,$data,1);
+            }
+            else{
+                $result = same_password($email, $password, $data);
+            }
             if ($result == true) {
-                $current_user = return_user_id($email, $data);
                 $_SESSION['user_id'] = $current_user['id'];
+                $_SESSION['is_admin'] = $is_admin;
                 header('Location: /');
                 exit();
             }

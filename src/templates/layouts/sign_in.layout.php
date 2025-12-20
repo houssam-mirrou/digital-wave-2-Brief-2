@@ -1,46 +1,62 @@
-<section>
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
-
-        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div class="pt-4">
-                <img src="../../img/wave2.png" alt="Your Company" class="mx-auto h-14 w-auto" />
-                <h2 class="text-white text-center text-2xl/9 font-bold tracking-tight">Connectez-vous à votre compte</h2>
-            </div>
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <form class="space-y-4 md:space-y-6" action="#" method="POST">
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse E-mail</label>
-                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
-                        <?php
-                        if (!valider_name($user_sing_in['email']) && $user_sing_in['email'] !== null) {
-                            echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <span class="font-bold">Erreur:</span> Veuillez entrer un email valide.
-                                </p>';
-                        }
-                        ?>
-                    </div>
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot de passe</label>
-                            <div class="text-sm">
-                                <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">Mot de passe oublié ?</a>
-                            </div>
-                        </div>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-                        <?php
-                        if (!valider_name($user_sing_in['password']) && $user_sing_in['password'] !== null) {
-                            echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <span class="font-bold">Erreur:</span> Veuillez entrer un mot de pass valide (doit etre plus que 8 caractères).
-                                </p>';
-                        }
-                        ?>
-                    </div>
-                    <button type="submit" class="w-full border-white bg-gray-700 text-white font-medium py-2.5 rounded-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-300 transform hover:scale-[1.02]">Sign in</button>
-                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Vous n'avez pas de compte ? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Inscrivez-vous ici</a>
-                    </p>
-                </form>
-            </div>
+<section class="container mx-auto py-16">
+    <div class="max-w-xl mx-auto p-8 rounded-xl shadow-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
+        
+        <div class="text-center mb-8">
+            <img src="../../img/wave2.png" alt="Your Company" class="mx-auto h-14 w-auto mb-4" />
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Connectez-vous à votre compte</h2>
         </div>
+
+        <form class="space-y-6" action="#" method="POST">
+            
+            <div>
+                <label for="email" class="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Adresse E-mail</label>
+                <input 
+                    type="email" 
+                    name="email" 
+                    id="email" 
+                    placeholder="name@company.com" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400" 
+                    value="<?= isset($user_sing_in['email']) ? htmlspecialchars($user_sing_in['email']) : '' ?>"
+                    required
+                >
+                <?php
+                if (isset($user_sing_in['email']) && !valider_name($user_sing_in['email'])) {
+                    echo '<p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            <span class="font-bold">Erreur:</span> Veuillez entrer un email valide.
+                        </p>';
+                }
+                ?>
+            </div>
+
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="password" class="text-sm font-semibold text-gray-700 dark:text-gray-300">Mot de passe</label>
+                    <a href="#" class="text-sm font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400">Mot de passe oublié ?</a>
+                </div>
+                <input 
+                    type="password" 
+                    name="password" 
+                    id="password" 
+                    placeholder="••••••••" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400" 
+                    required
+                >
+                <?php
+                if (isset($user_sing_in['password']) && !valider_name($user_sing_in['password'])) {
+                    echo '<p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            <span class="font-bold">Erreur:</span> Veuillez entrer un mot de passe valide (plus de 8 caractères).
+                        </p>';
+                }
+                ?>
+            </div>
+
+            <button type="submit" class="w-full bg-gray-900 text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 dark:bg-blue-600 dark:hover:bg-blue-700">
+                Sign in
+            </button>
+
+            <p class="text-sm font-light text-center text-gray-500 dark:text-gray-400">
+                Vous n'avez pas de compte ? <a href="#" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Inscrivez-vous ici</a>
+            </p>
+        </form>
     </div>
 </section>
