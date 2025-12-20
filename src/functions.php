@@ -117,30 +117,90 @@ function phone_available($phone, $data)
 
 //verifier si le password match the password in the data base
 
-function same_password($email, $password, $data)
+function same_password($email, $password, $data,$is_admin = 0)
 {
-    $query = 'SELECT mot_de_pass from users where email = ?';
+    $query = 'SELECT mot_de_pass from users where email = ?;';
     $result = $data->query($query, [$email]);
-    if(password_verify($password,$result[0]['mot_de_pass'])){
+    if($is_admin == 1){
+        if($password == $result[0]['mot_de_pass']){
+            return true;
+        }
+    }
+    else if(password_verify($password,$result[0]['mot_de_pass'])){
         return true;
     }
-    return false;
+    else {
+        return false;
+    }
 }
+
+// fonction qui retourner user id
 
 function return_user_id($email,$data){
     $query = 'SELECT id from users where email = ?;';
     $result = $data->query($query, [$email]);
     if ($result == []) {
-        return null;
+        return [];
     }
     return $result[0];
 }
 
+// fonction qui retourne le user information
+
 function return_user_information($id,$data){
-    $query = 'SELECT * from users where id = ?';
+    $query = 'SELECT * from users where id = ?;';
     $result = $data->query($query,[$id]);
     if($result == []){
-        return null;
+        return [];
     }
     return $result[0];
+}
+
+// fonction qui retourne if user est admin ou pas
+
+function return_if_user_admin($email,$data){
+    $query = 'SELECT is_admin from users where email = ?;';
+    $result = $data->query($query, [$email]);
+    if ($result == []) {
+        return [];
+    }
+    return $result[0]['is_admin'];
+}
+
+// get all users from data_base
+
+function return_all_users($data){
+    $query = 'SELECT id,first_name,last_name,email,phone_number,biography,date_inscription from users where is_admin=0;';
+    $result = $data->query($query);
+    if($result == []){
+        return [];
+    }
+    return $result;
+}
+
+// delete user from data base
+
+function delete_user ($id,$data) {
+    $query = 'DELETE from users where id=?';
+    $result = $data->query($query,[$id]);
+    return $result;
+}
+
+//get all contacts in database
+
+function return_all_contacts($data){
+    $query = 'SELECT * FROM contacts';
+    $result = $data->query($query);
+    if($result==[]){
+        return [];
+    }
+    return $result;
+}
+
+// delete contact from data base
+
+function delete_contact ($contact_id,$data) {
+    $query = 'DELETE from contacts where id=?';
+    $result = $data->query($query,[$contact_id]);
+    return $result;
 }

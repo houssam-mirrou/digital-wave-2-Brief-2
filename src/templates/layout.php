@@ -7,7 +7,8 @@ $routes_layout = [
     '/contact' => __DIR__ . '/layouts/contact.layout.php',
     '/sign-in' => __DIR__ . '/layouts/sign_in.layout.php',
     '/sign-up' => __DIR__ . '/layouts/sign_up.layout.php',
-    '/profile' => __DIR__ . '/layouts/profile.layout.php'
+    '/profile' => __DIR__ . '/layouts/profile.layout.php',
+    '/admin' => __DIR__ . '/layouts/admin.layout.php'
 ];
 
 
@@ -21,7 +22,10 @@ route_to_layout($uri, $routes_layout,$data,[
     'profile_user' => $profile_user ?? null,
     'profile_edit_user' => $profile_edit_user ?? null,
     'form_inputs' => $form_inputs ?? null,
-    'errors' => $errors ?? null
+    'errors' => $errors ?? null,
+    'all_users' => $all_users ?? null,
+    'all_contacts' => $all_contacts ?? null,
+    'active_tab' => $active_tab ?? null
 ]);
 
 echo '</main>';

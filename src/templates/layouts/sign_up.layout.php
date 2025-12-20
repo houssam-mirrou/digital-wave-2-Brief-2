@@ -1,109 +1,166 @@
-<section>
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
-        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div class="pt-4">
-                <img src="../../img/wave2.png" alt="Your Company" class="mx-auto h-14 w-auto" />
-                <h2 class="text-white text-center text-2xl/9 font-bold tracking-tight">S'inscrire</h2>
-            </div>
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    Créer un compte
-                </h1>
-                <form class="space-y-4 md:space-y-6" action="" method="POST">
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Votre courriel</label>
-                        <input value="<?= $user["email"] ?>" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
-                        <?php
-                        if (!valider_email($user['email']) && $user['email'] !== null) {
-                            echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <span class="font-bold">Erreur:</span> Veuillez entrer un email valide.
-                                </p>';
-                        }
-                        ?>
-                    </div>
-                    <div class="flex flex-row gap-4">
-                        <div class="flex flex-col w-1/2">
-                            <label for="prenom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Votre prénom</label>
-                            <input value="<?= $user["first_name"] ?>" type="text" name="prenom" id="prenom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Prénom" required="">
-                            <?php
-                            if (!valider_name($user['first_name']) && $user['first_name'] !== null) {
-                                echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                        <span class="font-bold">Erreur:</span> Vous devez écrire plus de deux caractères.
-                                    </p>';
-                            }
-                            ?>
-                        </div>
-                        <div class="flex flex-col w-1/2">
-                            <label for="nom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Votre nom</label>
-                            <input value="<?= $user["last_name"] ?>" type="text" name="nom" id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nom" required="">
-                            <?php
-                            if (!valider_name($user['last_name']) && $user['last_name'] !== null) {
-                                echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                        <span class="font-bold">Erreur:</span> Vous devez écrire plus de deux caractères.
-                                    </p>';
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Votre numéro de télephone</label>
-                        <input value="<?= $user["phone"] ?>" type="text" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+212 6 13 14 14 57" required="">
-                        <?php
-                        if (!verifier_phone($user['phone']) && $user['phone'] !== null) {
-                            echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <span class="font-bold">Erreur:</span> Veuillez entrer un nombre de télephone valide.
-                                </p>';
-                        }
-                        ?>
-                    </div>
-                    <div>
-                        <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Votre Biographie</label>
-                        <textarea name="bio" id="bio" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Je suis un team manager qui est tres ..."><?= $user["biographie"] == null ? '' : $user["biographie"]  ?></textarea>
-                        <?php
-                        if (!valider_description($user['biographie']) && $user['biographie'] !== null) {
-                            echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <span class="font-bold">Erreur:</span> La biographie doit contenir plus de 20 caractères.
-                                </p>';
-                        }
-                        ?>
-                    </div>
-                    <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot de passe</label>
-                        <input value="<?= $user["password"] ?>" type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-                        <?php
-                        if (!verifier_mot_pass($user['password'],$user['reconfirm_password']) && $user['password'] !== null) {
-                            echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <span class="font-bold">Erreur:</span> Veuillez entrer un mot de pass valide (doit etre plus que 8 caractères).
-                                </p>';
-                        }
-                        ?>
-                    </div>
-                    <div>
-                        <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmez le mot de passe</label>
-                        <input value="<?= $user["reconfirm_password"] ?>"type="confirm-password" name="confirm-password" id="confirm-password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-                        <?php
-                        if (!verifier_mot_pass($user['password'],$user['reconfirm_password']) && $user['password'] !== null) {
-                            echo '<p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <span class="font-bold">Erreur:</span> Veuillez entrer un mot de pass valide.
-                                </p>';
-                            
-                        }
-                        ?>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="flex items-center h-5">
-                            <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
-                        </div>
-                        <div class="ml-3 text-sm">
-                            <label for="terms" class="font-light text-gray-500 dark:text-gray-300">J'accepte <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Les Conditions Générales</a></label>
-                        </div>
-                    </div>
-                    <button type="submit" class="w-full border-white bg-gray-700 text-white font-medium py-2.5 rounded-lg border-2 border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-300 transform hover:scale-[1.02]">Create an account</button>
-                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Already have an account? <a href="sign-in" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
-                    </p>
-                </form>
-            </div>
+<section class="container mx-auto py-16">
+    <div class="max-w-xl mx-auto p-8 rounded-xl shadow-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
+        
+        <div class="text-center mb-8">
+            <img src="../../img/wave2.png" alt="Your Company" class="mx-auto h-14 w-auto mb-4" />
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Créer un compte</h2>
+            <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Rejoignez-nous dès aujourd'hui</p>
         </div>
+
+        <form class="space-y-6" action="" method="POST">
+            
+            <div>
+                <label for="email" class="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Votre courriel</label>
+                <input 
+                    type="email" 
+                    name="email" 
+                    id="email" 
+                    placeholder="name@company.com" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400" 
+                    value="<?= isset($user["email"]) ? htmlspecialchars($user["email"]) : '' ?>"
+                    required
+                >
+                <?php
+                if (isset($user['email']) && !valider_email($user['email'])) {
+                    echo '<p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            <span class="font-bold">Erreur:</span> Veuillez entrer un email valide.
+                        </p>';
+                }
+                ?>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="prenom" class="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Votre prénom</label>
+                    <input 
+                        type="text" 
+                        name="prenom" 
+                        id="prenom" 
+                        placeholder="Prénom" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400" 
+                        value="<?= isset($user["first_name"]) ? htmlspecialchars($user["first_name"]) : '' ?>"
+                        required
+                    >
+                    <?php
+                    if (isset($user['first_name']) && !valider_name($user['first_name'])) {
+                        echo '<p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                                <span class="font-bold">Erreur:</span> +2 caractères requis.
+                            </p>';
+                    }
+                    ?>
+                </div>
+
+                <div>
+                    <label for="nom" class="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Votre nom</label>
+                    <input 
+                        type="text" 
+                        name="nom" 
+                        id="nom" 
+                        placeholder="Nom" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400" 
+                        value="<?= isset($user["last_name"]) ? htmlspecialchars($user["last_name"]) : '' ?>"
+                        required
+                    >
+                    <?php
+                    if (isset($user['last_name']) && !valider_name($user['last_name'])) {
+                        echo '<p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                                <span class="font-bold">Erreur:</span> +2 caractères requis.
+                            </p>';
+                    }
+                    ?>
+                </div>
+            </div>
+
+            <div>
+                <label for="phone" class="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Votre numéro de télephone</label>
+                <input 
+                    type="text" 
+                    name="phone" 
+                    id="phone" 
+                    placeholder="+212 6 13 14 14 57" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400" 
+                    value="<?= isset($user["phone"]) ? htmlspecialchars($user["phone"]) : '' ?>"
+                    required
+                >
+                <?php
+                if (isset($user['phone']) && !verifier_phone($user['phone'])) {
+                    echo '<p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            <span class="font-bold">Erreur:</span> Numéro de téléphone invalide.
+                        </p>';
+                }
+                ?>
+            </div>
+
+            <div>
+                <label for="bio" class="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Votre Biographie</label>
+                <textarea 
+                    name="bio" 
+                    id="bio" 
+                    rows="3"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 resize-y" 
+                    placeholder="Je suis un team manager..."
+                ><?= isset($user["biographie"]) ? htmlspecialchars($user["biographie"]) : '' ?></textarea>
+                <?php
+                if (isset($user['biographie']) && !valider_description($user['biographie'])) {
+                    echo '<p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            <span class="font-bold">Erreur:</span> Minimum 20 caractères.
+                        </p>';
+                }
+                ?>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <label for="password" class="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Mot de passe</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="password" 
+                        placeholder="••••••••" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400" 
+                        value="<?= isset($user["password"]) ? htmlspecialchars($user["password"]) : '' ?>"
+                        required
+                    >
+                    <?php
+                    // Note: Assuming verifier_mot_pass takes (pass, confirm) logic
+                    if (isset($user['password']) && isset($user['reconfirm_password']) && !verifier_mot_pass($user['password'], $user['reconfirm_password'])) {
+                        echo '<p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                                <span class="font-bold">Erreur:</span> Mot de passe invalide ou ne correspond pas.
+                            </p>';
+                    }
+                    ?>
+                </div>
+
+                <div>
+                    <label for="confirm-password" class="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Confirmez le mot de passe</label>
+                    <input 
+                        type="password" 
+                        name="confirm-password" 
+                        id="confirm-password" 
+                        placeholder="••••••••" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400" 
+                        value="<?= isset($user["reconfirm_password"]) ? htmlspecialchars($user["reconfirm_password"]) : '' ?>"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="flex items-center h-5">
+                    <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required>
+                </div>
+                <div class="ml-3 text-sm">
+                    <label for="terms" class="font-light text-gray-500 dark:text-gray-300">J'accepte <a class="font-medium text-blue-600 hover:underline dark:text-blue-500" href="#">Les Conditions Générales</a></label>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-gray-900 text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 dark:bg-blue-600 dark:hover:bg-blue-700">
+                Créer un compte
+            </button>
+
+            <p class="text-sm font-light text-center text-gray-500 dark:text-gray-400">
+                Vous avez déjà un compte ? <a href="sign-in.php" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Connectez-vous ici</a>
+            </p>
+        </form>
     </div>
 </section>

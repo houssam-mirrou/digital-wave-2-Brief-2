@@ -30,7 +30,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-$contacts = $data->query('select * from contacts');
-
-
 require __DIR__ . '/../views/contact.view.php';
